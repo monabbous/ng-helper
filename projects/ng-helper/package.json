@@ -1,0 +1,21 @@
+{
+  "name": "@monabbous/helper",
+  "version": "1.0.1",
+  "peerDependencies": {
+    "@angular/common": "^9.1.12",
+    "@angular/core": "^9.1.12",
+    "@monabbous/object-digger": "0.0.2"
+  },
+  "dependencies": {
+    "@monabbous/object-digger": "0.0.2",
+    "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "@monabbous/object-digger": "0.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/monabbous/ng-helper.git"
+  },
+  "author": "monabbous"
+}
