@@ -97,11 +97,11 @@ export class HelperService {
         catchError(response => this.config?.catchError ? this.config?.catchError(response, request) : throwError(response)),
         switchMap(response => this.config?.responseMap ? this.config?.responseMap(response, request) : of(response)),
         catchError(response => {
-          if (this.config.ngFormErrorInjector) {
+          if (this.config.ngFormErrorInjector && request.form) {
             const injector = this.config.ngFormErrorInjector(response, request);
             return (injector instanceof Observable ? injector : of(injector))
               .pipe(
-                tap(errors => {
+                switchMap(errors => {
                   for (const key of Object.keys(errors)) {
                     const control = request.form.form.get(key.split('.'));
                     if (control) {
@@ -130,7 +130,9 @@ export class HelperService {
                       }
                     }
                   }
-                })
+                  return throwError(response);
+                }),
+                catchError(() => throwError(response)),
               );
           }
           return throwError(response);
